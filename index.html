@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediReach AI — Reach the Unreached. Treat the Untreated.</title>
+<meta name="description" content="MediReach AI bridges the healthcare gap in the Global South with offline-first, AI-powered triage and diagnosis for first responders, rural clinics, and mobile ambulances.">
+<meta property="og:title" content="MediReach AI — Reach the Unreached. Treat the Untreated.">
+<meta property="og:description" content="Offline-first AI triage and diagnosis bringing emergency care to underserved communities across Africa, South Asia, and Latin America.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a1f1c;
+    --paper:#f6f4ee;
+    --pulse:#0bbf8a;
+    --pulse-deep:#06755a;
+    --signal:#ff5a3c;
+    --slate:#1c302c;
+    --mist:#dfe3da;
+    --line:rgba(10,31,28,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* ---- Nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,244,238,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:1.12rem;letter-spacing:-.01em}
+  .brand .glyph{width:26px;height:26px;flex:none}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:.92rem;color:var(--slate);transition:color .2s}
+  .nav-links a:hover{color:var(--pulse-deep)}
+  .nav-cta{
+    border:1px solid var(--ink);border-radius:2px;
+    padding:9px 18px;font-size:.88rem;font-weight:500;
+    transition:all .2s;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--paper)}
+  @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---- Hero ---- */
+  .hero{position:relative;padding:88px 0 76px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--pulse-deep);margin-bottom:22px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:32px;height:1px;background:var(--pulse-deep)}
+  h1{
+    font-family:"Newsreader",serif;font-weight:500;
+    font-size:clamp(2.6rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.02em;
+    margin-bottom:24px;
+  }
+  h1 em{font-style:italic;color:var(--pulse-deep)}
+  .lede{font-size:1.12rem;color:var(--slate);max-width:30em;margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-primary{
+    background:var(--ink);color:var(--paper);border-radius:2px;
+    padding:14px 26px;font-weight:500;font-size:.96rem;
+    transition:transform .2s,background .2s;
+  }
+  .btn-primary:hover{background:var(--pulse-deep);transform:translateY(-2px)}
+  .btn-ghost{padding:14px 6px;font-weight:500;font-size:.96rem;border-bottom:1px solid transparent;transition:border .2s}
+  .btn-ghost:hover{border-bottom-color:var(--ink)}
+
+  /* ---- Hero signature: the reach map ---- */
+  .reach{position:relative;aspect-ratio:1/1;max-width:420px;margin-left:auto;width:100%}
+  .reach svg{width:100%;height:100%;overflow:visible}
+  .node-core{transform-origin:center}
+  .ring{fill:none;stroke:var(--pulse);opacity:0;transform-origin:260px 260px;animation:ripple 4s ease-out infinite}
+  .ring:nth-child(2){animation-delay:1.3s}
+  .ring:nth-child(3){animation-delay:2.6s}
+  @keyframes ripple{
+    0%{transform:scale(.15);opacity:.7;stroke-width:2}
+    100%{transform:scale(1);opacity:0;stroke-width:.4}
+  }
+  .spoke{stroke:var(--pulse-deep);stroke-width:1.2;opacity:.32;stroke-dasharray:3 4}
+  .clinic{fill:var(--signal)}
+  .clinic.lit{animation:lit 4s ease-in-out infinite}
+  @keyframes lit{0%,100%{opacity:.35}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){.ring,.clinic.lit{animation:none}.ring{opacity:.18}}
+
+  /* ---- Stat strip ---- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);color:var(--paper)}
+  .strip-in{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  @media(max-width:720px){.strip-in{grid-template-columns:repeat(2,1fr)}}
+  .stat{padding:34px 28px;border-right:1px solid rgba(246,244,238,.12)}
+  .stat:last-child{border-right:none}
+  @media(max-width:720px){.stat:nth-child(2){border-right:none}}
+  .stat .num{font-family:"Newsreader",serif;font-size:2.4rem;line-height:1;color:var(--pulse);margin-bottom:8px}
+  .stat .lab{font-size:.82rem;color:rgba(246,244,238,.66);line-height:1.4}
+
+  /* ---- Sections ---- */
+  section{padding:84px 0}
+  .sec-head{max-width:38em;margin-bottom:52px}
+  .sec-tag{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pulse-deep);margin-bottom:16px}
+  h2{font-family:"Newsreader",serif;font-weight:500;font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.015em}
+  h2 em{font-style:italic;color:var(--pulse-deep)}
+  .sec-sub{font-size:1.05rem;color:var(--slate);margin-top:18px}
+
+  /* ---- Flow (how it works) ---- */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:860px){.flow{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.flow{grid-template-columns:1fr}}
+  .step{background:var(--paper);padding:32px 26px;position:relative}
+  .step .idx{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--signal);margin-bottom:20px}
+  .step h3{font-size:1.16rem;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+  .step p{font-size:.93rem;color:var(--slate)}
+  .step .ic{margin-bottom:18px;color:var(--pulse-deep)}
+
+  /* ---- Offline feature band ---- */
+  .band{background:var(--slate);color:var(--paper)}
+  .band .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  @media(max-width:840px){.band .wrap{grid-template-columns:1fr;gap:36px}}
+  .band h2{color:var(--paper)}
+  .band h2 em{color:var(--pulse)}
+  .band p{color:rgba(246,244,238,.78);font-size:1.05rem;margin-top:18px}
+  .toggle-demo{
+    border:1px solid rgba(246,244,238,.2);border-radius:3px;padding:30px;
+    background:rgba(11,191,138,.06);
+  }
+  .conn-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(246,244,238,.1)}
+  .conn-row:last-child{border-bottom:none}
+  .conn-row .lbl{font-size:.95rem}
+  .pill{font-family:"IBM Plex Mono",monospace;font-size:.74rem;padding:4px 11px;border-radius:2px}
+  .pill.on{background:var(--pulse);color:var(--ink)}
+  .pill.off{background:rgba(246,244,238,.12);color:rgba(246,244,238,.6)}
+  .pill.ok{background:transparent;border:1px solid var(--pulse);color:var(--pulse)}
+
+  /* ---- Tech / NVIDIA ---- */
+  .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media(max-width:780px){.tech-grid{grid-template-columns:1fr}}
+  .tech-card{border:1px solid var(--line);border-radius:3px;padding:30px;background:#fff;transition:transform .2s,box-shadow .2s}
+  .tech-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -24px rgba(10,31,28,.4)}
+  .tech-card .kicker{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;color:var(--signal);text-transform:uppercase;margin-bottom:14px}
+  .tech-card h3{font-size:1.2rem;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+  .tech-card p{font-size:.92rem;color:var(--slate)}
+
+  /* ---- CTA ---- */
+  .cta-final{text-align:center;padding:96px 0}
+  .cta-final h2{margin-bottom:20px}
+  .cta-final p{font-size:1.1rem;color:var(--slate);max-width:34em;margin:0 auto 32px}
+
+  /* ---- Footer ---- */
+  footer{border-top:1px solid var(--line);padding:48px 0 40px}
+  .foot-in{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{max-width:24em}
+  .foot-brand .glyph{width:24px;height:24px}
+  .foot-brand p{font-size:.88rem;color:var(--slate);margin-top:14px}
+  .foot-contact{font-size:.92rem;line-height:2}
+  .foot-contact a:hover{color:var(--pulse-deep)}
+  .foot-bottom{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-size:.8rem;color:var(--slate);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#" class="brand">
+      <svg class="glyph" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#0a1f1c" stroke-width="1.5"/>
+        <path d="M16 7v18M7 16h18" stroke="#0bbf8a" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.4" fill="#ff5a3c"/>
+      </svg>
+      MediReach<span style="color:var(--pulse-deep)">&nbsp;AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#offline">Offline-first</a>
+      <a href="#tech">Technology</a>
+      <a href="#contact" class="nav-cta">Partner with us</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">AI triage for the Global South</div>
+      <h1>Reach the unreached.<br><em>Treat</em> the untreated.</h1>
+      <p class="lede">MediReach AI delivers offline-first triage and diagnosis to first responders, rural clinics, and mobile ambulances — with zero specialist dependency.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Partner with us</a>
+        <a href="#how" class="btn-ghost">See how it works →</a>
+      </div>
+    </div>
+    <div class="reach" aria-hidden="true">
+      <svg viewBox="0 0 520 520">
+        <circle class="ring" cx="260" cy="260" r="240"/>
+        <circle class="ring" cx="260" cy="260" r="240"/>
+        <circle class="ring" cx="260" cy="260" r="240"/>
+        <!-- spokes -->
+        <g class="spokes">
+          <line class="spoke" x1="260" y1="260" x2="110" y2="120"/>
+          <line class="spoke" x1="260" y1="260" x2="420" y2="140"/>
+          <line class="spoke" x1="260" y1="260" x2="440" y2="330"/>
+          <line class="spoke" x1="260" y1="260" x2="150" y2="420"/>
+          <line class="spoke" x1="260" y1="260" x2="90" y2="290"/>
+          <line class="spoke" x1="260" y1="260" x2="330" y2="450"/>
+        </g>
+        <!-- clinics -->
+        <circle class="clinic lit" cx="110" cy="120" r="6"/>
+        <circle class="clinic lit" cx="420" cy="140" r="6" style="animation-delay:.6s"/>
+        <circle class="clinic lit" cx="440" cy="330" r="6" style="animation-delay:1.2s"/>
+        <circle class="clinic lit" cx="150" cy="420" r="6" style="animation-delay:1.8s"/>
+        <circle class="clinic lit" cx="90" cy="290" r="6" style="animation-delay:2.4s"/>
+        <circle class="clinic lit" cx="330" cy="450" r="6" style="animation-delay:3s"/>
+        <!-- core -->
+        <g class="node-core">
+          <circle cx="260" cy="260" r="34" fill="#0a1f1c"/>
+          <path d="M260 244v32M244 260h32" stroke="#0bbf8a" stroke-width="4" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <div class="stat"><div class="num">1B+</div><div class="lab">people without access to basic diagnostics</div></div>
+    <div class="stat"><div class="num">0</div><div class="lab">specialist dependency at point of care</div></div>
+    <div class="stat"><div class="num">Offline</div><div class="lab">first — no stable connectivity required</div></div>
+    <div class="stat"><div class="num">3</div><div class="lab">regions: Africa, South Asia, Latin America</div></div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">From symptom to specialist</div>
+      <h2>One device. <em>Four</em> decisive steps.</h2>
+      <p class="sec-sub">Every interaction moves a patient closer to care, even where no doctor is present and no signal reaches.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="step">
+        <div class="idx">01</div>
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 014 4v3a4 4 0 01-8 0V7a4 4 0 014-4z" stroke="currentColor" stroke-width="1.6"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Assess</h3>
+        <p>A first responder describes symptoms in their own language. The model interprets and probes for what matters.</p>
+      </div>
+      <div class="step">
+        <div class="idx">02</div>
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 11l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h3>Recommend</h3>
+        <p>Instant first-aid guidance or an emergency protocol, ranked by urgency and grounded in clinical evidence.</p>
+      </div>
+      <div class="step">
+        <div class="idx">03</div>
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h3>Route</h3>
+        <p>The nearest qualified doctor, hospital, or specialist — with contact details and turn-by-turn directions.</p>
+      </div>
+      <div class="step">
+        <div class="idx">04</div>
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2 5 4-12 2 7h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Reach</h3>
+        <p>The patient arrives at care faster — the gap between an emergency and a clinician closed in minutes, not days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="offline" class="band">
+  <div class="wrap">
+    <div>
+      <div class="sec-tag" style="color:var(--pulse)">Built for where signal fails</div>
+      <h2>Most apps stop when the <em>network</em> does. Ours doesn't.</h2>
+      <p>Unlike telemedicine that assumes stable connectivity, MediReach runs diagnostic models locally on low-power edge devices. Care happens in the moment, on the ground — and syncs when a connection returns.</p>
+    </div>
+    <div class="toggle-demo reveal">
+      <div class="conn-row"><span class="lbl">Cellular signal</span><span class="pill off">OFFLINE</span></div>
+      <div class="conn-row"><span class="lbl">Local AI triage</span><span class="pill on">RUNNING</span></div>
+      <div class="conn-row"><span class="lbl">First-aid protocols</span><span class="pill ok">AVAILABLE</span></div>
+      <div class="conn-row"><span class="lbl">Patient routing</span><span class="pill ok">AVAILABLE</span></div>
+      <div class="conn-row"><span class="lbl">Records sync</span><span class="pill off">QUEUED</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Engineered on NVIDIA</div>
+      <h2>Lightweight at the edge. <em>Scalable</em> at the hub.</h2>
+      <p class="sec-sub">A layered architecture that runs where the patient is and scales where the data lives.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <div class="kicker">Edge inference</div>
+        <h3>Jetson modules</h3>
+        <p>NVIDIA Jetson edge AI runs lightweight diagnostic models locally on low-power devices — in clinics, ambulances, and the field, no datacenter required.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="kicker">Cloud scale</div>
+        <h3>NIM microservices</h3>
+        <p>NVIDIA NIM microservices deliver scalable cloud inference at central hubs, handling heavier workloads and coordinating across regions.</p>
+      </div>
+      <div class="tech-card reveal">
+        <div class="kicker">Model training</div>
+        <h3>BioNeMo framework</h3>
+        <p>NVIDIA BioNeMo accelerates clinical NLP training on multilingual, low-resource datasets — so the model speaks the languages of the unreached.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-final">
+  <div class="wrap">
+    <div class="sec-tag" style="margin-bottom:18px">Partnerships &amp; pilots</div>
+    <h2>Let's get diagnostics <em>to the last mile.</em></h2>
+    <p>We work with health ministries, NGOs, clinic networks, and ambulance operators to deploy MediReach where it's needed most. Tell us about your community.</p>
+    <a href="mailto:hello@empyreanmedireach.co.uk" class="btn-primary">hello@empyreanmedireach.co.uk</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <svg class="glyph" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" stroke="#0a1f1c" stroke-width="1.5"/>
+            <path d="M16 7v18M7 16h18" stroke="#0bbf8a" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3.4" fill="#ff5a3c"/>
+          </svg>
+          MediReach AI
+        </a>
+        <p>AI-powered triage and diagnosis bridging the healthcare gap in the Global South. Reach the Unreached. Treat the Untreated.</p>
+      </div>
+      <div class="foot-contact">
+        <strong style="display:block;margin-bottom:8px;font-weight:600">Get in touch</strong>
+        <a href="mailto:hello@empyreanmedireach.co.uk">hello@empyreanmedireach.co.uk</a><br>
+        <a href="#how">How it works</a><br>
+        <a href="#tech">Technology</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Empyrean MediReach Ltd. All rights reserved.</span>
+      <span class="mono">empyreanmedireach.co.uk</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
